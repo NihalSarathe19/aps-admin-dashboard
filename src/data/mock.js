@@ -1,0 +1,45 @@
+export const scans = [
+  { id: "prod-web", name: "Production Web Application", type: "Greybox", status: "completed", progress: 100, vuln: [8, 15, 24, 12], lastScan: "2h ago" },
+  { id: "cust-api", name: "Customer Portal API", type: "Greybox", status: "completed", progress: 100, vuln: [3, 12, 18, 8], lastScan: "5h ago" },
+  { id: "pay-gw", name: "Payment Gateway Integration", type: "Whitebox", status: "completed", progress: 100, vuln: [12, 23, 18, 5], lastScan: "1d ago" },
+  { id: "admin", name: "Internal Admin Dashboard", type: "Greybox", status: "completed", progress: 100, vuln: [5, 8, 14, 22], lastScan: "2d ago" },
+  { id: "mobile", name: "Mobile API Backend", type: "Blackbox", status: "completed", progress: 100, vuln: [2, 7, 11, 15], lastScan: "3d ago" },
+  { id: "auth", name: "Authentication Service", type: "Greybox", status: "completed", progress: 100, vuln: [1, 4, 9, 6], lastScan: "4d ago" },
+  { id: "cloud", name: "Cloud Infrastructure Scan", type: "Greybox", status: "scheduled", progress: 0, vuln: [0, 0, 0, 0], lastScan: "Pending" },
+  { id: "thirdparty", name: "Third-party Integration Test", type: "Greybox", status: "scheduled", progress: 0, vuln: [0, 0, 0, 0], lastScan: "Pending" },
+  { id: "iot", name: "IoT Device Network", type: "Blackbox", status: "failed", progress: 15, vuln: [0, 0, 0, 0], lastScan: "1d ago" },
+  { id: "legacy", name: "Legacy System Audit", type: "Blackbox", status: "failed", progress: 8, vuln: [0, 0, 0, 0], lastScan: "2d ago" },
+  { id: "micro", name: "Microservices Security Check", type: "Greybox", status: "completed", progress: 100, vuln: [6, 11, 16, 9], lastScan: "6d ago" },
+  { id: "db", name: "Database Security Audit", type: "Whitebox", status: "completed", progress: 100, vuln: [4, 9, 13, 7], lastScan: "1w ago" },
+];
+
+export const consoleLogs = [
+  { time: "09:00:00", text: "Initiating comprehensive security assessment on api.target-app.com. Beginning with OSINT gathering and subdomain enumeration." },
+  { time: "09:00:45", text: "DNS enumeration complete. Discovered 23 subdomains including admin.target-app.com, api.target-app.com, staging.target-app.com" },
+  { time: "09:01:30", text: "Port scan results: Open ports detected - 80/HTTP, 443/HTTPS, 8080/HTTP-Proxy, 3306/MySQL. Proceeding with service enumeration." },
+  { time: "09:02:15", text: "Target is running Nginx 1.24.0 with PHP 8.1.12. Detected WordPress 6.3.1 installation at /blog endpoint." },
+  { time: "09:03:00", text: "Interesting finding: /api/v1/docs endpoint exposed. Swagger documentation reveals 47 API endpoints with authentication requirements." },
+  { time: "09:03:45", text: "Testing authentication bypass techniques. Attempting SQL injection on login form at /api/v1/auth/login" },
+  { time: "09:04:30", text: "SUCCESS: Time-based blind SQL injection confirmed on username parameter. Payload: admin' AND SLEEP(5)--" },
+  { time: "09:05:15", text: "Extracting database schema. Found users, sessions, api_keys tables. Dumping credentials..." },
+  { time: "09:06:00", text: "Retrieved 156 user records. Detected weak password hashing (MD5 without salt). Cracking hashes..." },
+  { time: "09:06:45", text: "Cracked 42 passwords. Testing for privilege escalation vulnerabilities using compromised credentials." },
+  { time: "09:07:30", text: "CRITICAL: Found IDOR vulnerability at /api/v1/users/{userId}/profile. Can access any user profile by modifying userId parameter." },
+  { time: "09:08:15", text: "Testing /api/v1/admin endpoints. Discovered missing authorization checks on admin panel." },
+  { time: "09:09:00", text: "File upload functionality detected at /api/v1/uploads. Testing for unrestricted file upload vulnerability." },
+  { time: "09:09:45", text: "Successfully uploaded webshell disguised as image. File validation only checks extension, not MIME type or content." },
+  { time: "09:10:30", text: "Webshell accessible at https://target-app.com/uploads/shell.php.jpg. Remote code execution confirmed." },
+];
+
+export const findings = [
+  { severity: "critical", time: "09:04:30", title: "Time-Based Blind SQL Injection", endpoint: "/api/v1/auth/login", description: "Blind SQL injection in username parameter enables data extraction; confirmed with SLEEP() and boolean conditions." },
+  { severity: "critical", time: "09:09:45", title: "Unrestricted File Upload Leading to RCE", endpoint: "/api/v1/uploads", description: "Upload accepts malicious PHP disguised as image; insufficient validation allows remote code execution." },
+  { severity: "critical", time: "09:06:00", title: "Weak Password Storage Mechanism", endpoint: "/api/v1/users", description: "MD5 without salt enables rapid cracking; 42 passwords recovered quickly." },
+  { severity: "high", time: "09:07:30", title: "Insecure Direct Object Reference (IDOR)", endpoint: "/api/v1/users/{userId}/profile", description: "Sequential IDs allow unauthorized access to other user profiles." },
+  { severity: "high", time: "09:08:15", title: "Missing Authorization on Admin Endpoints", endpoint: "/api/v1/admin/*", description: "Admin endpoints lack proper authorization checks." },
+  { severity: "high", time: "09:03:00", title: "Sensitive API Documentation Publicly Exposed", endpoint: "/api/v1/docs", description: "Swagger docs exposed without auth reveal attack surface." },
+  { severity: "medium", time: "09:02:15", title: "Outdated Software Components", endpoint: "WordPress /blog", description: "WordPress version is behind current stable; multiple CVEs likely applicable." },
+  { severity: "medium", time: "09:01:30", title: "Unnecessary Services and Open Ports", endpoint: "Port 3306/MySQL", description: "MySQL port exposed publicly increases attack surface." },
+  { severity: "low", time: "09:00:45", title: "Subdomain Enumeration Information Disclosure", endpoint: "DNS Records", description: "Staging/admin subdomains discovered may have weaker security." },
+  { severity: "low", time: "09:05:15", title: "Verbose Error Messages", endpoint: "/api/v1/auth/login", description: "DB errors leak stack details; implement generic error handling." },
+];
