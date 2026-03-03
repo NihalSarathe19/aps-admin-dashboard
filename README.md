@@ -1,123 +1,133 @@
-APS Security Platform (React + Vite)
-Frontend-only prototype of an “APS Security Platform” UI recreated in React with 3 primary screens (Login → Dashboard → Scan Detail) plus working sidebar navigation pages (Projects, Scans, Schedule, Notifications, Settings, Support).
-Built with functional components + hooks, client-side routing, light/dark theme tokens, and responsive layout.
+📘 APS Security Platform (React + Vite)
 
-Tech stack
-React (functional components, hooks)
+Frontend-only prototype of an APS Security Platform UI, recreated in React with a modern, responsive dashboard layout.
+Includes authentication flow (mocked), dashboard, scan detail view, and a full sidebar navigation system with multiple working pages.
 
-Vite (dev server + production build tooling; scripts: dev, build, preview)
-​
+🚀 Tech Stack
 
-React Router for routing + active navigation using NavLink
-​
+React (functional components + hooks)
 
-CSS (custom design tokens via CSS variables; light/dark modes)
+Vite (fast dev server + production build tooling)
 
-Screens & pages
-Main flow (core screens)
-Login (/)
+React Router for routing & active navigation
 
-Dashboard (/dashboard)
+CSS with custom theme tokens (light/dark modes)
 
-Scan Detail (/scans/:scanId)
+LocalStorage for theme & mock authentication
 
-Sidebar pages (tabs must work)
-Projects (/projects)
+🖥️ Screens & Pages
+Main Flow
+Route	Screen
+/	Login
+/dashboard	Dashboard
+/scans/:scanId	Scan Detail
+Sidebar Pages
+Route	Screen
+/projects	Projects
+/scans	Scans (List View)
+/schedule	Schedule
+/notifications	Notifications
+/settings	Settings
+/support	Support
 
-Scans (/scans) – list view
+✔ Navigation uses NavLink to automatically apply active styles.
 
-Schedule (/schedule)
+✨ Features Implemented
+✅ Routing & Navigation
 
-Notifications (/notifications)
+Fully functional sidebar navigation
 
-Settings (/settings)
+Every tab loads a real page (no dead buttons)
 
-Support (/support)
+Clicking scan row → opens Scan Detail
 
-Navigation uses NavLink to automatically apply active styles when the route matches.
-​
+Keyboard support: Enter/Space activate rows
 
-Features implemented
-Routing + navigation
+🌗 Light/Dark Theme Support
 
-Sidebar tabs navigate to real pages (no “dead” buttons)
+Global theme toggle
 
-Scan row click (and Enter/Space) opens Scan Detail
+CSS variables for theme tokens
 
-Light/Dark theme
+Theme persists in localStorage
 
-Global theme toggle using CSS variables
+⚡ Interactivity
 
-Theme persisted in localStorage
+Modals:
 
-Interactivity
+New Scan
 
-Modals (New Scan, Filter, Columns, Export, Stop Scan)
+Filter
 
-Toast notifications for actions
+Columns
+
+Export
+
+Stop Scan
+
+Toast notifications
 
 Loading states
 
-Skeleton loaders to simulate mock data resolving
+Skeleton loaders for async look-and-feel
 
-Responsive UI
+📱 Responsive UI
 
-Mobile hamburger menu with overlay
+Mobile hamburger sidebar
 
-Scrollable table on small screens
+Overlay behavior
 
-Accessibility
+Scrollable tables for smaller screens
 
-Keyboard support: Enter/Space on scan rows, Escape closes modals/menu, Ctrl/Cmd+K focuses search
+♿ Accessibility
 
-ARIA labels on key controls
+ARIA labels added
 
-Setup instructions
-1) Prerequisites
-Node.js + npm installed
+Escape key closes modals/menus
 
-Recommended: Node LTS
+Ctrl/Cmd + K focuses search
 
-2) Install dependencies
-From the project root (where package.json is):
+Keyboard-usable scan rows
 
-bash
+🛠️ Setup Instructions
+1. Prerequisites
+
+Node.js (LTS recommended)
+
+npm (comes with Node)
+
+2. Install Dependencies
 npm install
-3) Run the app (development)
-Start Vite dev server:
-
-bash
+3. Run Development Server
 npm run dev
-Vite prints the local URL in your terminal (commonly http://localhost:5173/).
-​
 
-4) Build for production
-Create an optimized production build:
+Vite will print a URL such as:
 
-bash
+http://localhost:5173/
+4. Build for Production
 npm run build
-5) Preview the production build locally
-Serve the built app locally:
-
-bash
+5. Preview Production Build
 npm run preview
-vite preview is meant for locally previewing the production build, not as a full production server.
-​
 
-Project structure
-text
+Note: vite preview is for local production preview, not a real server.
+
+📂 Project Structure
 src/
   main.jsx
   App.jsx
   index.css
+
   data/
     mock.js
+
   context/
     ThemeContext.jsx
     ToastContext.jsx
+
   shell/
     AppShell.jsx
     Sidebar.jsx
+
   screens/
     Login.jsx
     Dashboard.jsx
@@ -128,6 +138,7 @@ src/
     Notifications.jsx
     Settings.jsx
     Support.jsx
+
   ui/
     ToastHost.jsx
     Modal.jsx
@@ -135,32 +146,47 @@ src/
     Badge.jsx
     Tabs.jsx
     Skeleton.jsx
-Known limitations (current)
-No backend: all data is mocked (scans, logs, findings). Actions like “Export” and “New Scan” show UI feedback but don’t persist anywhere.
+⚠️ Known Limitations (Current Prototype)
+❌ No backend
 
-No authentication: “auth” is simulated with localStorage (aps_authed), not real login/roles.
+All data (scans, findings, logs) is mocked.
 
-No real filtering/column persistence: filter/column modals are UX-complete but can be extended to persist preferences per user/org.
+❌ No real authentication
 
-Export is simulated: doesn’t generate real PDF/CSV/JSON files yet (just modal + toast).
+"Login" only sets aps_authed in localStorage.
 
-Projects/Schedule/Notifications/Support pages are scaffold pages designed to be expanded with real tables/cards/forms.
+❌ Filter/column modals don’t persist settings
 
-Troubleshooting
-“Failed to resolve import … Does the file exist?”
-This indicates a missing local file/folder (path mismatch). Ensure the file exists exactly at the import path and restart npm run dev. This error is a common Vite import-analysis failure when the referenced file is missing.
-​
+UI-complete but not linked to persistent storage.
 
-“Failed to resolve import 'react-router-dom'…”
-Install React Router in the same folder you run Vite:
+❌ Export functionality is simulated
 
-bash
+Shows modal + toast but doesn’t generate real files.
+
+❌ Sidebar pages (Projects, Schedule, etc.)
+
+Currently placeholders ready to expand.
+
+🐞 Troubleshooting
+❗ "Failed to resolve import … Does the file exist?"
+
+A file path mismatch.
+Fix the path and restart your dev server:
+
+npm run dev
+❗ "Failed to resolve import 'react-router-dom'"
+
+Install it inside your project folder:
+
 npm install react-router-dom
-Suggested next improvements
-Persist scan list changes and user preferences (filters/columns/theme) in local storage or a backend.
+🚧 Suggested Next Improvements
 
-Implement real export generation (PDF/CSV/JSON).
+Persist scan list changes, theme, filters in localStorage or backend
 
-Add a proper auth flow and role-based access control.
+Implement real export (PDF / CSV / JSON)
 
-Add pagination/virtualization for large scan lists.
+Add real authentication + roles
+
+Add pagination or virtualization for large lists
+
+Connect the UI with APIs and real scan data
