@@ -1,16 +1,37 @@
-# React + Vite
+# APS Security Platform (React + Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A frontend-only prototype of the **APS Security Platform** with 3 core screens (Login → Dashboard → Scan Detail) plus working sidebar navigation pages (Projects, Scans, Schedule, Notifications, Settings, Support).  
+Built with **React (functional components + hooks)**, **Vite**, and **React Router**.
 
-Currently, two official plugins are available:
+## Tech stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React + Vite
+- React Router (client-side routing) [web:76]
+- CSS (design tokens via CSS variables, light/dark modes)
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 3 main flows
+  - Login → Dashboard
+  - Dashboard scan row → Scan Detail
+  - Export/Stop actions with modals + toasts
+- Sidebar navigation pages
+  - Dashboard, Projects, Scans, Schedule, Notifications, Settings, Support
+- Light/Dark theme toggle (global)
+- Responsive layout (mobile sidebar menu + overlay)
+- Loading skeletons (mock async load)
+- Keyboard accessibility (Enter/Space on rows, Escape closes modals/menu, Ctrl/Cmd+K focuses search)
 
-## Expanding the ESLint configuration
+## Getting started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js (LTS recommended)
+- npm (ships with Node)
+
+### Install
+
+From the project root (where `package.json` exists):
+
+```bash
+npm install
